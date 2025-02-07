@@ -1,7 +1,7 @@
 from textnode import TextNode, TextType
+from htmlnode import HTMLNode
 
 def main():
-    text_node_one = TextNode("This is a bold text", TextType.BOLD, "https://www.boot.dev")
-    print(text_node_one)
+    pass
 
 main()
