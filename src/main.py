@@ -1,8 +1,29 @@
-from textnode import TextNode, TextType
-from htmlnode import HTMLNode, LeafNode, ParentNode
-# from split_delimiter import split_nodes_delimiter, extract_markdown_images, extract_markdown_links
+import os
+import shutil
+
+def copy_static(source = "static", destination = "public"):
+        
+    # delete the destination directory if it exists
+    if os.path.exists(destination):
+        shutil.rmtree(destination)
+        
+    os.mkdir(destination) # create destination directory
+        
+    files = os.listdir(source) # create a list of files in source directory
+
+    # loop over files in the list
+    for element in files:
+        if os.path.isfile(os.path.join(source, element)): # if elements is a file, copy it to destination folder
+            source_path = os.path.join(source, element)
+            destination_path = os.path.join(destination, element)
+            # print(f"Copying {source_path} to {destination_path}")
+            shutil.copy(source_path, destination_path)
+            
+        else:   # if element is a directory, recursively call the function on it
+            # print(f"Processing directory: {element}")
+            copy_static(source = os.path.join(source, element), destination= os.path.join(destination, element))
 
 def main():
-    pass
+    copy_static()
 
 main()
