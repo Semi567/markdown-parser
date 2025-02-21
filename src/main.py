@@ -1,5 +1,8 @@
 import os
 import shutil
+from page_generator import generate_page
+
+
 
 def copy_static(source = "static", destination = "public"):
         
@@ -25,5 +28,6 @@ def copy_static(source = "static", destination = "public"):
 
 def main():
     copy_static()
+    generate_page(from_path="content/index.md", template_path="template.html", dest_path="public/index.html")
 
 main()
