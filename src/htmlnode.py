@@ -7,14 +7,6 @@ class HTMLNode():
 
     def to_html(self):
         raise NotImplementedError("to_html not implemented")
-    
-    # def props_to_html(self):
-    #     if self.props is None:
-    #         return ""
-    #     result = ""
-    #     for key, value in self.props.items():
-    #         result += f' {key}="{value}"'
-    #     return result
 
     def props_to_html(self):
         if self.props is None:

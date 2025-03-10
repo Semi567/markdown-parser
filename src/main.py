@@ -1,14 +1,21 @@
 import os
 import shutil
 from pathlib import Path
+import sys
 from page_generator import generate_pages_recursive
+
+# Default basepath to "/" if no argument is provided
+if len(sys.argv) > 1:
+    basepath = sys.argv[1]  # Get the first CLI argument
+else:
+    basepath = "/"  # Default value
 
 # Get the directory where the script is running from
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # Go up one level to reach the root directory
 root_dir = os.path.dirname(script_dir)
 
-def copy_static(source="static", destination="public"):
+def copy_static(source="static", destination="docs"):
     # Convert to absolute paths
     source_abs = os.path.join(root_dir, source)
     destination_abs = os.path.join(root_dir, destination)
@@ -35,7 +42,7 @@ def copy_static(source="static", destination="public"):
 
 def main():
     # Create public directory
-    public_dir = os.path.join(root_dir, "public")
+    public_dir = os.path.join(root_dir, "docs")
     os.makedirs(public_dir, exist_ok=True)
     
     # Copy static files
@@ -44,10 +51,9 @@ def main():
     # Generate all pages
     content_dir = os.path.join(root_dir, "content")
     template_path = os.path.join(root_dir, "template.html")
-    public_dir = os.path.join(root_dir, "public")
+    public_dir = os.path.join(root_dir, "docs")
     
     # Call your generate_pages_recursive function with these paths
-    generate_pages_recursive(content_dir, template_path, public_dir)
-
+    generate_pages_recursive(content_dir, template_path, public_dir, basepath)
 
 main()
