@@ -29,9 +29,17 @@ class LeafNode(HTMLNode):
             raise ValueError("LeafNode must have a value.")
         if self.tag is None:
             return self.value
+        
+        props = self.props_to_html()
+        
+        # Special case for self-closing tags like img
+        if self.tag == "img":
+            return f"<{self.tag}{props}>"
         if self.tag == "a":
             link = self.props_to_html()
             return f"<{self.tag}{link}>{self.value}</{self.tag}>"
+        
+        # All other tags
         return f"<{self.tag}>{self.value}</{self.tag}>"
     
 class ParentNode(HTMLNode):
